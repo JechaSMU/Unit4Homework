@@ -1,0 +1,23 @@
+---
+title: "BootstrapUnit4HomeWork"
+output:
+  html_document:
+    keep_md: true
+---
+
+
+# R Markdown
+
+
+```{r Exp50}
+n <- 50 
+expmean50 <- numeric(1000)
+
+for (i in 1:1000){
+      x <- exp(n)
+      expmean50[i] <- mean(x)
+}
+mean(expmean50)
+```
+
+
