@@ -1,14 +1,57 @@
 ---
-title: "BootstrapUnit4HomeWork"
+title: " Unit4 HomeWork"
+author: "jean Jecha"
 output:
   html_document:
     keep_md: true
 ---
 
+# Bootstrap normal distribution sample 100 (simple normal)
+```{r BS.Simple.100}
+x <- rnorm(100, 22, 5)
 
-# R Markdown
+# Simple normal dist
+n <- 1000
+tmpbootnrm <- numeric(n)
+for(i in 1:n) {
+      tmpsamp <- sample(x, 100, replace=TRUE)
+      tmpbootnrm[i] <- mean(tmpsamp)
+}
+```
+
+```{r tmphist}
+summary(tmpbootnrm)
+hist(tmpbootnrm)
+```
+
+# Bootstrap normal distribution of size 50 (parametric confidence interval)
+```{r BS50}
+
+x <- rnorm(50, 22, 5)
+xbar <- mean(x)
+
+## Find the pivot t-interval
+bootnorm <- numeric(1000)
+for (i in 1:1000){
+      bootsamp <- sample(x,size=50,replace=TRUE)
+      bootmean = mean(bootsamp)
+      bootsd = sd(bootsamp)
+      tpivot = (bootmean - xbar)/(bootsd/sqrt(50))
+      bootnorm[i] <- tpivot
+}
+
+```
+
+showing inter quartile
+```{r BS50Quartile}
+#get numbers at the 2.5% and 97.5% quantile 
+quant <- quantile(bootnorm, c(0.025, 0.975)) 
+
+quant
+```
 
 
+# Exponential distribution for sample size 50
 ```{r Exp50}
 n <- 50 
 expmean50 <- numeric(1000)
@@ -20,4 +63,15 @@ for (i in 1:1000){
 mean(expmean50)
 ```
 
+# Exponential distribution for sample size 75
+```{r Exp75}
+n <- 75 
+expmean75 <- numeric(1000)
+
+for (i in 1:1000){
+      x <- exp(n)
+      expmean75[i] <- mean(x)
+}
+mean(expmean75)
+```
 
